@@ -1,0 +1,467 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh; /* Ensure the body itself takes full viewport height */
+  background: url('/images/bg.png') no-repeat center center/cover;
+  overflow-x: hidden;
+}
+
+.signature {
+  font-style: italic;
+  font-size: 12px;
+  color: #212121;
+  padding-top: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.signature:hover {
+  color: white;
+}
+
+/* Navbar */
+.navigationWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #222;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+  color: white;
+  text-transform: uppercase;
+  overflow: visible;
+  z-index: 1000;
+}
+
+.navigationWrapper .logoWrapper {
+  display: flex;
+}
+
+.navigationWrapper .logoWrapper .stylish {
+  font-weight: bold;
+}
+
+.navigationWrapper .logoWrapper .logo {
+  padding-left: 4px;
+  color: #ea4f4c;
+}
+
+.navigationWrapper .navigation {
+  display: flex;
+  list-style-type: none;
+}
+
+.navigationWrapper .navigation li {
+  opacity: 1;
+  list-style-type: none;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.navigationWrapper .navigation .parent {
+  padding: 0 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.navigationWrapper .navigation .parent .link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+
+.navigationWrapper .navigation .parent .link:hover {
+  color: #4cd0ea;
+}
+
+.navigationWrapper .navigation .subnavigation {
+  display: none;
+  list-style-type: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #222;
+  z-index: 10;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+}
+
+.navigationWrapper .navigation .subnavigation li a {
+  font-size: 17px;
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navigationWrapper .navigation .subnavigation li a:hover {
+  background-color: #333;
+}
+
+.active.parent {
+  transform: translate(-40px, -25px);
+}
+
+.active.parent .link {
+  font-size: 12px;
+}
+
+.active.parent .subnavigation {
+  display: block;
+  transform: translate(0, 0);
+}
+
+.invisible {
+  opacity: 0 !important;
+  transform: translate(50px, 0);
+}
+
+/* Avatar circle */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #444;
+  background-image: url(''); /* empty placeholder */
+  background-size: cover;
+  background-position: center;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+/* Dropdown box */
+.profile-menu {
+  position: relative;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #222;
+  border-radius: 8px;
+  padding: 10px;
+  display: none;
+  min-width: 120px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
+
+/* Button inside dropdown */
+.signout-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 100%;
+  text-align: center;
+}
+
+.signout-btn:hover {
+  background-color: #333;
+}
+
+/* First page CSS (CV Analyzer) */
+.cv-analyzer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 100px 50px;
+  width: 100%;
+  min-height: 100vh; /* Make it full viewport height */
+  max-width: 1200px;
+  gap: 40px;
+  box-sizing: border-box; /* Ensure padding doesn't add to the height */
+}
+
+.cv-content {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.cv-content h2 {
+  font-family: 'Michroma', sans-serif;
+  font-size: 48px;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.cv-content p {
+  font-size: 16px;
+  font-family: 'McLaren', sans-serif;
+  line-height: 1.6;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.analyze-btn {
+  background-color: #ccc;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.analyze-btn:hover {
+  background-color: #bbb;
+}
+
+.cv-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  
+}
+
+.cv-image img {
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 120px;  
+}
+
+/* Job Preparation Section (Second Page) */
+.job-preparation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 50px; /* Increased top and bottom padding for more vertical space */
+  width: 100%;
+  min-height: 100vh; /* Make it full viewport height */
+  max-width: 1200px;
+  text-align: center;
+  box-sizing: border-box; /* Ensure padding doesn't add to the height */
+}
+
+.job-prep-content h2 {
+  font-family: 'Michroma', sans-serif;
+  font-size: 45px;
+  margin-bottom: 100px; /* Increased space between heading and paragraph */
+  color: white;
+}
+
+.job-prep-content p {
+  font-size: 18px;
+  font-family: 'McLaren', sans-serif;
+  line-height: 1.6;
+  color: white;
+  margin-bottom: 100px; /* Increased space between paragraph and buttons */
+}
+
+.job-prep-buttons {
+  display: flex;
+  gap: 85px; /* Increased horizontal space between buttons */
+}
+
+.prep-button {
+  background-color: #f1ecec;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.prep-button:hover {
+  background-color: #949191;
+}
+
+
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+  .cv-analyzer,
+  .job-preparation {
+    padding: 60px 30px; /* Adjust padding for smaller screens */
+    flex-direction: column; /* Stack content on smaller screens */
+    align-items: center;
+    text-align: center;
+  }
+
+  .cv-content {
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+
+  .cv-content h2 {
+    font-size: 32px;
+  }
+
+  .cv-content p {
+    font-size: 14px;
+  }
+
+  .cv-image {
+    justify-content: center;
+  }
+
+  .cv-image img {
+    width: 80%; /* Make image responsive */
+  }
+
+  .job-prep-content h2 {
+    font-size: 32px;
+  }
+
+  .job-prep-content p {
+    font-size: 14px;
+  }
+
+  .job-prep-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .prep-button {
+    width: 100%;
+  }
+}
+
+/* Aptitude Test Section (Third Page) */
+.aptitude-test {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 50px;
+  width: 100%;
+  min-height: 100vh; /* Make it full viewport height */
+  max-width: 1200px;
+  text-align: center;
+  box-sizing: border-box; /* Ensure padding doesn't add to the height */
+}
+
+.aptitude-content h2 {
+  font-family: 'Michroma', sans-serif;
+  font-size: 40px;
+  margin-bottom: 110px;
+  color: white;
+}
+
+.aptitude-content p {
+  font-size: 16px;
+  font-family: 'McLaren', sans-serif;
+  line-height: 1.6;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.aptitude-button {
+  margin-top: 80px; /* Add space between text and button */
+}
+
+.assessment-button {
+  background-color: #ccc;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.assessment-button:hover {
+  background-color: #bbb;
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+  .aptitude-test {
+    padding: 60px 30px; /* Adjust padding for smaller screens */
+  }
+
+  .aptitude-content h2 {
+    font-size: 32px;
+  }
+
+  .aptitude-content p {
+    font-size: 14px;
+  }
+}
+
+/* Interview Simulation Section (Last Page) */
+.interview-simulation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 50px;
+  width: 100%;
+  min-height: 100vh; /* Make it full viewport height */
+  max-width: 1200px;
+  text-align: center;
+  box-sizing: border-box; /* Ensure padding doesn't add to the height */
+}
+
+.interview-content h2 {
+  font-family: 'Michroma', sans-serif;
+  font-size: 40px;
+  margin-bottom: 110px;
+  color: white;
+}
+
+.interview-content p {
+  font-size: 16px;
+  font-family: 'McLaren', sans-serif;
+  line-height: 1.6;
+  color: white;
+  margin-bottom: 90px;
+}
+
+.interview-button {
+  margin-top: 20px; /* Add space between text and button */
+}
+
+.practice-button {
+  background-color: #ccc;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.practice-button:hover {
+  background-color: #bbb;
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+  .interview-simulation {
+    padding: 60px 30px; /* Adjust padding for smaller screens */
+  }
+
+  .interview-content h2 {
+    font-size: 32px;
+  }
+
+  .interview-content p {
+    font-size: 14px;
+  }
+}

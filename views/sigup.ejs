@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | CrackIT</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('/images/logimg.jpg') no-repeat center center/cover;
+      z-index: -1;
+    }
+
+    .form-container {
+      width: 90%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 30px 40px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    
+
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    form h2 {
+      margin-bottom: 20px;
+    }
+
+    form label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-size: 0.9rem;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    form button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #002b5c;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background-color: #004080;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="form-container">
+    <div class="logo">
+      
+      <h1>KRACIT</h1>
+    </div>
+    <form id="registerForm">
+      <h2>Register now</h2>
+      <label>Email</label>
+      <input type="email" id="email" placeholder="username@gmail.com" required />
+      
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Password" required />
+      
+      <label>Confirm Password</label>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+      
+      <button type="submit">Register now</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirmPassword').value;
+
+      if (password !== confirm) {
+        alert('Passwords do not match!');
+        return;
+      }
+
+      try {
+        const response = await fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert(data.message);
+          window.location.href = '/'; // redirect after successful registration
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error('Registration error:', error);
+        alert('An error occurred during registration.');
+      }
+    });
+  </script>
+</body>
+</html>

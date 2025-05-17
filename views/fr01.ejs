@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>crackit info</title>
+<link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/fr11.css">
+</head>
+<body>
+  <nav class="navigationWrapper">
+    <div class="logoWrapper">
+      <span class="stylish">KRAC</span>
+      <span class="logo">IT</span>
+    </div>
+    <ul class="navigation">
+      <li class="parent"><a class="link" href="#abt">About</a></li>
+      <li class="parent" id="services">
+        <a class="link" href="#feat"><i class="fas fa-minus"></i> FEATURES <i class="fas fa-plus"></i></a>
+      </li>
+      <li class="parent"><a class="link" href="#login">LOG IN</a></li>
+    </ul>
+  </nav>
+
+
+  
+  <section class="hero">
+  
+    <video autoplay muted loop playsinline id="hero-video">
+      <source src="images/landpage.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+  
+    <div class="button-stack">
+      <div class="btn-wrapper">
+        <button class="hero-btn">Prep for your Interview</button>
+        <span class="hover-reveal">Ace your interviews with expert-crafted prep.</span>
+      </div>
+      <div class="btn-wrapper">
+        <button class="hero-btn">Free Resources</button>
+        <span class="hover-reveal">Access curated guides, notes & tools for free.</span>
+      </div>
+      <div class="btn-wrapper">
+        <button class="hero-btn">Learn with AI</button>
+        <span class="hover-reveal">Get smarter with personalized AI learning.</span>
+      </div>
+    </div>
+  
+  </section>
+  
+
+  <section id = "abt" class="about-section">
+  <div class="about-title">ABOUT</div>
+  <div class="about-text">
+    We are a passionate team dedicated to transforming the job placement and hiring<br>
+    process through intelligent, AI-driven solutions. Our platform is built to support both<br>
+    job seekers and recruiters, making career building and talent acquisition smarter,<br>
+    faster, and more effective.
+  </div>
+</section>
+
+  <!-- Features Section -->
+<section id = "feat" class="features-section">
+  <div class="features-header">Features</div>
+  <div class="features-grid">
+    <div class="feature-box">
+      Analysis AI analyzes resumes to extract key skills, experience, and qualifications. Candidates get personalized feedback with keyword suggestions, while recruiters receive automated candidate rankings based on job fit.
+    </div>
+    <div class="feature-box">
+      AI-driven assessments evaluate both technical and soft skills, providing instant feedback. Recruiters can also design custom tests for specific roles.
+    </div>
+    <div class="feature-box">
+      Simulate real interview scenarios where AI evaluates responses, communication, and body language. Candidates receive detailed feedback, and recruiters gain deeper insights.
+    </div>
+    <div class="feature-box">
+      We provide a wide range of questions, learning materials,to help candidates prepare thoroughly for every stage of the hiring process.
+    </div>
+  </div>
+</section>
+
+
+<section class="login-section" id="login">
+  <div class="login-container">
+    <h2>Login</h2>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error-box"><%= error %></div>
+    <% } %>
+
+    <form action="/login" method="POST">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="username@gmail.com" required />
+
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="Password" required />
+
+      <div class="forgot-password">
+        <a href="#">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="login-btn">Sign in</button>
+
+      <div class="register-link">
+        <a href="/signup">Register here</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<section class="feedback-section" id="feedback">
+  <div class="feedback-container">
+    <h2>We would love your feedback</h2>
+    <!-- You can add form or email display here later -->
+     email us:- 123@gmail.com
+  </div>
+</section>
+
+  
+  
+
+<script src="js/fr21.js"></script>
+</body>
+</html>
