@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Interview Simulator</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/questions.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>MOCK INTERVIEW SIMULATOR by-KRACIT</h1>
+    
+    <!-- Setup Screen -->
+    <div id="setup-screen" class="screen">
+      <div class="form-group">
+        <label for="field">Select your field:</label>
+        <select id="field">
+          <option value="software">Software Engineering</option>
+          <option value="marketing">Marketing</option>
+          <option value="finance">Finance</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="question-count">Number of questions (3-10):</label>
+        <input type="number" id="question-count" min="3" max="10" value="5">
+      </div>
+      
+      <button id="start-btn" class="btn">Start Interview</button>
+    </div>
+    
+    <!-- Interview Screen -->
+    <div id="interview-screen" class="screen hidden">
+      <div id="question-container">
+        <h2 id="question-text"></h2>
+        <div class="progress">Question <span id="current-q">1</span> of <span id="total-q">5</span></div>
+      </div>
+      
+      <div class="answer-section">
+        <div class="voice-controls">
+          <button id="listen-btn" class="btn">Listen to Question</button>
+          <button id="record-btn" class="btn">Record Answer</button>
+          <div id="recording-status">Not recording</div>
+        </div>
+        
+        <textarea id="answer-text" placeholder="Type your answer here..."></textarea>
+        
+        <div class="action-buttons">
+          <button id="skip-btn" class="btn secondary">Skip Question</button>
+          <button id="next-btn" class="btn">Next Question</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Analysis Screen -->
+    <div id="analysis-screen" class="screen hidden">
+      <h2>Interview Analysis</h2>
+      <div id="score-container">
+        <div class="score-circle">
+          <span id="score">0</span>
+        </div>
+        <div class="score-label">Your Score</div>
+      </div>
+      
+      <div id="analysis-text" class="markdown-content"></div>
+      
+      <button id="restart-btn" class="btn">Start New Interview</button>
+    </div>
+  </div>
+  
+  <script src="js/script.js"></script>
+</body>
+</html>

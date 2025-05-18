@@ -3,6 +3,8 @@ const path = require("path");
 const mongoose = require('mongoose');
 const session = require('express-session');
 const User = require('./models/users.js');
+const cors = require('cors');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
 const app = express();
@@ -54,6 +56,9 @@ app.get('/signup', (req, res) => {
 app.get('/dashboard', requireLogin, (req, res) => {
   res.render("dash.ejs");
 });
+app.get('/analyze-interview', requireLogin, (req, res) => {
+  res.render("inter.ejs");
+});
 
 // Register route
 app.post('/register', async (req, res) => {
@@ -91,6 +96,51 @@ app.post('/login', async (req, res) => {
     res.redirect("/dashboard");
   } catch (err) {
     res.status(500).send('Server error');
+  }
+});
+
+
+
+
+// mock interview
+
+
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+// API endpoint to analyze interview responses
+app.post('/analyze-interview', async (req, res) => {
+  try {
+    const { questions, answers, field } = req.body;
+    
+    // Combine questions and answers into a single prompt
+    let prompt = `Analyze this mock interview for a ${field} position. Provide:\n`;
+    prompt += `1. A score out of 100 based on answer quality\n`;
+    prompt += `2. Detailed feedback on each answer\n`;
+    prompt += `3. Overall strengths and weaknesses\n\n`;
+    
+    for (let i = 0; i < questions.length; i++) {
+      prompt += `Question ${i+1}: ${questions[i]}\n`;
+      prompt += `Answer: ${answers[i]}\n\n`;
+    }
+    
+    prompt += `Please provide comprehensive analysis in markdown format.`;
+    
+    // Get the Gemini Flash model
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Updated to 1.5-flash
+    
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    
+    res.json({ analysis: text });
+  } catch (error) {
+    console.error('Error analyzing interview:', error);
+    res.status(500).json({ 
+      error: 'Failed to analyze interview',
+      details: error.message,
+      suggestion: 'Please ensure you are using the correct model name and your API key is valid'
+    });
   }
 });
 
