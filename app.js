@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
-  res.render("");
+  res.render("sigup.ejs");
 });
 
 app.get('/dashboard', requireLogin, (req, res) => {
