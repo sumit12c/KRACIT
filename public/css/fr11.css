@@ -155,6 +155,44 @@ body {
   position: relative;
 }
 
+.vertical-scroll {
+  position: absolute;
+  left: 45px;
+  top: 0;
+  height: 100%;
+  width: 50px; /* slightly wider to fit background */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  z-index: 2;
+
+  background: rgba(50, 50, 50, 0.5); /* dark grey translucent */
+  border-radius: 12px;
+  padding: 10px 5px;
+  box-sizing: border-box;
+}
+
+
+.scroll-text {
+  color: white;
+  font-size: 20px;
+  white-space: nowrap;
+  animation: scrollVertical 20s linear infinite;
+}
+
+@keyframes scrollVertical {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+
 #hero-video {
   width: 100%;
   height: 100vh; /* Ensures it scales with the viewport */
@@ -311,35 +349,75 @@ body {
   box-sizing: border-box;
 }
 
-
 .features-header {
   font-family: 'MedievalSharp', cursive;
   font-size: 64px;
   color: white;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
-.features-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  max-width: 1200px;
+.carousel-container {
+  position: relative;
+  max-width: 1000px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-track-wrapper {
+  overflow: hidden;
   width: 100%;
 }
 
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
 .feature-box {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 250px;
   font-family: 'McLaren', cursive;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 30px;
-  padding: 30px 25px;
+  padding: 40px;
   color: white;
-  width: 260px;
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 18px;
+  line-height: 1.7;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
+
+/* Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  color: black;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  backdrop-filter: blur(6px);
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+
+
 
 
 
