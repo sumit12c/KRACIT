@@ -1,121 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>crackit info</title>
-<link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="css/fr11.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kracit</title>
+  <link rel="stylesheet" href="css/fr11.css" />
 </head>
 <body>
-  <nav class="navigationWrapper">
-    <div class="logoWrapper">
-      <span class="stylish">KRAC</span>
-      <span class="logo">IT</span>
+  <div class="hero-container">
+    <header class="navbar">
+      <div class="logo">KRACIT</div>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#features">Feature</a>
+        <a href="#login">Log in</a>
+        
+      </nav>
+      <button class="get-started" onclick="window.location.href='/signup'">Get Started now</button>
+
+    </header>
+
+    <section class="hero-content" id="home">
+      <div class="text-content">
+        <p class="tagline">Your Career, Evolved.</p>
+        <h1>Unlock Your<br>
+         Potential</h1>
+        <p class="description">
+          Kracit uses AI to provide personalized career guidance, helping you ace interviews and land your dream job efficiently.
+        </p>
+        <div class="hero-buttons">
+          <button class="get-started" onclick="window.location.href='/signup'">Get Started</button>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+<!--about section-->
+<section class="about-section" id="about">
+  <div class="about-content">
+    <div class="about-image">
+      <img src="/images/lside.png" alt="About illustration" />
     </div>
-    <ul class="navigation">
-      <li class="parent"><a class="link" href="#abt">About</a></li>
-      <li class="parent" id="services">
-        <a class="link" href="#feat"><i class="fas fa-minus"></i> FEATURES <i class="fas fa-plus"></i></a>
-      </li>
-      <li class="parent"><a class="link" href="#login">LOG IN</a></li>
-    </ul>
-  </nav>
+    <div class="about-text">
+      <div class="tagline">Your Career, Evolved.</div>
+      <h2>About Kracit</h2>
+      <p class="main">
+        Kracit is your AI-powered career companion, offering CV analysis, study
+        materials, aptitude test, and mock interview simulations.
+      </p>
+      <p>
+        We leverage AI to provide personalized career guidance, helping you ace
+        interviews and land your dream job efficiently and effectively.
+      </p>
+    </div>
+  </div>
+</section>
 
 
-  
-  <section class="hero">
-  
-    <video autoplay muted loop playsinline id="hero-video">
-      <source src="images/landpage.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-
-    <!-- Vertical scrolling text -->
-  <div class="vertical-scroll">
-    <div class="scroll-text">
-  You can make mistakes here.&nbsp;&nbsp;&nbsp;&nbsp;Learning is a journey of mistakes.&nbsp;&nbsp;&nbsp;&nbsp;Growth begins where comfort ends.&nbsp;&nbsp;&nbsp;&nbsp;Try and analyse with AI.&nbsp;&nbsp;&nbsp;&nbsp;AI can describe your mistakes.
+<section class="features-section" id="features">
+  <div class="features-header">
+  <div class="features-heading-text">
+    <p class="features-subtitle">Key Features</p>
+    <h2 class="features-title">Our Features</h2>
+  </div>
+  <p class="features-description">
+    Our platform offers AI-driven CV analysis, study material, and mock interview simulations for career success.
+  </p>
 </div>
 
-  </div>
-  
-    <div class="button-stack">
-      <div class="btn-wrapper">
-        <button class="hero-btn">Prep for your Interview</button>
-        <span class="hover-reveal">Ace your interviews with expert-crafted prep.</span>
-      </div>
-      <div class="btn-wrapper">
-        <button class="hero-btn">Free Resources</button>
-        <span class="hover-reveal">Access curated guides, notes & tools for free.</span>
-      </div>
-      <div class="btn-wrapper">
-        <button class="hero-btn">Learn with AI</button>
-        <span class="hover-reveal">Get smarter with personalized AI learning.</span>
-      </div>
-    </div>
-  
-  </section>
-  
 
-  <section id = "abt" class="about-section">
-  <div class="about-title">ABOUT</div>
-  <div class="about-text">
-    We are a passionate team dedicated to transforming the job placement and hiring<br>
-    process through intelligent, AI-driven solutions. Our platform is built to support both<br>
-    job seekers and recruiters, making career building and talent acquisition smarter,<br>
-    faster, and more effective.
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon yellow-ring">
+        <img src="/images/i2.png" alt="CV Analysis Icon">
+      </div>
+      <h3>CV Analysis</h3>
+      <p>AI-powered CV analysis provides instant feedback, enhancing your resume for optimal impact and results.</p>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon pink-ring">
+        <img src="/images/i3.png" alt="Study Material Icon">
+      </div>
+      <h3>Study Material</h3>
+      <p>Access curated study material tailored to your needs, ensuring comprehensive preparation and knowledge retention.</p>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-icon blue-ring">
+        <img src="/images/i4.png" alt="Mock Interview Icon">
+      </div>
+      <h3>Mock Interview</h3>
+      <p>Experience realistic interview simulations with instant feedback, refining your skills and boosting confidence.</p>
+    </div>
+  </div>
+
+  <div class="feature-item feature-bottom">
+    <div class="feature-icon green-ring">
+      <img src="/images/i1.png" alt="Aptitude Test Icon">
+    </div>
+    <h3>Aptitude Test</h3>
+    <p>Evaluate and enhance your problem-solving skills with tailored aptitude tests covering logical reasoning, math, and verbal ability.</p>
   </div>
 </section>
 
-  <!-- Features Section -->
-<section id="feat" class="features-section">
-  <div class="features-header">Features</div>
-
-  <div class="carousel-container">
-    <!-- Left Arrow -->
-    <button class="carousel-arrow left-arrow">&#10094;</button>
-
-    <!-- Slide Wrapper -->
-    <div class="carousel-track-wrapper">
-      <div class="carousel-track">
-        <div class="feature-box">
-          AI Based CV Analysis<br>
-          <br>
-          <br>
-          Analysis AI analyzes resumes to extract key skills, experience, and qualifications. Candidates get personalized feedback with keyword suggestions.Analysis will be provided with all the flaws and room for improvemnet
-        </div>
-        <div class="feature-box">
-          Aptitude Tests<br>
-          <br>
-          <br>
-          aptitude is another imortant aspect of testing your knowledge assessments are great means<br> to analyze yourself. Assessments evaluate both technical and soft skills, providing instant feedback. Recruiters can also design custom tests for specific roles. We provide a large number of questions to practice.
-        </div>
-        <div class="feature-box">
-          AI Analysed Mock Interview Simulation <br>
-          <br>
-          <br>
-          Simulate real interview scenarios where AI evaluates responses, communication. Candidates receive<br> detailed feedback from AI and tells the candidate that how to speak the answers in a better way.
-        </div>
-        <div class="feature-box">
-          Learning Materials<br>
-          <br>
-          <br>
-          learning is an important process before start of anything without knowledge no one can become master<br> so we provide a wide range of questions and learning materials to help candidates prepare thoroughly for every stage of the hiring process.
-        </div>
-      </div>
-    </div>
-
-    <!-- Right Arrow -->
-    <button class="carousel-arrow right-arrow">&#10095;</button>
-  </div>
-</section>
-
-
-
-
+<!--login section-->
 <section class="login-section" id="login">
   <div class="login-container">
     <h2>Login</h2>
@@ -153,9 +144,8 @@
   </div>
 </section>
 
-  
-  
 
-<script src="js/fr21.js"></script>
+
+  <script src="js/fr21.js"></script>
 </body>
 </html>
