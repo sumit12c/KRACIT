@@ -43,6 +43,16 @@
       color: white;
       text-align: center;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+      /* Animation setup */
+      transform: scale(0);
+      animation: popupAnimation 0.5s ease forwards;
+    }
+
+    @keyframes popupAnimation {
+      to {
+        transform: scale(1);
+      }
     }
 
     .logo {
@@ -52,8 +62,6 @@
       gap: 10px;
       margin-bottom: 20px;
     }
-
-    
 
     .logo h1 {
       font-size: 1.8rem;
@@ -94,13 +102,37 @@
     form button:hover {
       background-color: #004080;
     }
+    #notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(0, 43, 92, 0.95);
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  font-size: 0.95rem;
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.4s ease;
+}
+
+#notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hidden {
+  display: none;
+}
+
   </style>
 </head>
 <body>
   <div class="background"></div>
   <div class="form-container">
     <div class="logo">
-      
       <h1>KRACIT</h1>
     </div>
     <form id="registerForm">
@@ -119,40 +151,56 @@
   </div>
 
   <script>
-    document.getElementById('registerForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
+  function showNotification(message) {
+    const note = document.getElementById('notification');
+    note.textContent = message;
+    note.classList.remove('hidden');
+    note.classList.add('show');
 
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const confirm = document.getElementById('confirmPassword').value;
+    setTimeout(() => {
+      note.classList.remove('show');
+      setTimeout(() => note.classList.add('hidden'), 400);
+    }, 3000); // hides after 3 seconds
+  }
 
-      if (password !== confirm) {
-        alert('Passwords do not match!');
-        return;
+  document.getElementById('registerForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirm = document.getElementById('confirmPassword').value;
+
+    if (password !== confirm) {
+      showNotification('Passwords do not match!');
+      return;
+    }
+
+    try {
+      const response = await fetch('/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showNotification(data.message || 'Registration successful!');
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2000); // delay redirect to allow message to show
+      } else {
+        showNotification(data.message || 'Registration failed.');
       }
+    } catch (error) {
+      console.error('Registration error:', error);
+      showNotification('An error occurred during registration.');
+    }
+  });
+</script>
 
-      try {
-        const response = await fetch('/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email, password })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          alert(data.message);
-          window.location.href = '/'; // redirect after successful registration
-        } else {
-          alert(data.message);
-        }
-      } catch (error) {
-        console.error('Registration error:', error);
-        alert('An error occurred during registration.');
-      }
-    });
-  </script>
+  <div id="notification" class="hidden"></div>
 </body>
 </html>
