@@ -17,9 +17,7 @@ body {
   padding: 30px 20px;
   overflow: hidden;
   height: 100vh;
-
 }
-
 
 .navbar {
   display: flex;
@@ -42,7 +40,7 @@ body {
 }
 
 .nav-links a:hover {
-  color: #ff79c6; /* pinkish on hover */
+  color: #ff79c6;
 }
 
 .cta {
@@ -67,9 +65,8 @@ body {
 .text-content {
   flex: 1 1 300px;
   max-width: 500px;
-  padding-left: 150px; /* <-- Add this line */
+  padding-left: 150px;
 }
-
 
 .text-content .tagline {
   letter-spacing: 2px;
@@ -105,42 +102,16 @@ body {
   cursor: pointer;
 }
 
-
-
-
 .nav-links a {
-  /* default styles */
   font-size: 20px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .navbar {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .nav-links a {
-    margin: 8px;
-  }
-}
-
-/*about*/
+/* About */
 .about-section {
   padding: 60px 20px;
   color: white;
-  height:84vh;
+  height: auto;
+  padding-bottom: 60px;
 }
 
 .about-content {
@@ -158,7 +129,7 @@ body {
   display: flex;
   justify-content: center;
   padding-right: 40px;
-  margin-top:40px;
+  margin-top: 40px;
 }
 
 .about-image img {
@@ -196,8 +167,7 @@ body {
   color: #f0f0f0;
 }
 
-
-/*feature section*/
+/* Features */
 .features-section {
   padding: 4rem 1rem;
   color: white;
@@ -239,11 +209,7 @@ body {
   min-width: 250px;
   font-size: 20px;
   color: #ccc;
-  
-  /* Remove this line */
-  /* text-align: right; */
 }
-
 
 .features-grid {
   display: flex;
@@ -252,7 +218,6 @@ body {
   gap: 2rem;
   margin-bottom: 4rem;
 }
-
 
 .feature-item {
   max-width: 280px;
@@ -291,7 +256,6 @@ body {
   border: 8px solid #66e0a3;
 }
 
-/* 4th feature */
 .feature-bottom {
   margin: 0 auto;
 }
@@ -305,9 +269,7 @@ body {
   font-weight: 600;
 }
 
-
-
-/* Login Section */
+/* Login */
 .login-section {
   width: 100%;
   background: url('/images/bglog.png') no-repeat center center/cover;
@@ -406,7 +368,7 @@ body {
   font-size: 14px;
 }
 
-/* Feedback Section */
+/* Feedback */
 .feedback-section {
   background-color: #000;
   width: 100%;
@@ -429,6 +391,102 @@ body {
   font-weight: bold;
 }
 
+/* =========================
+   ✅ Responsive Enhancements
+   ========================= */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+  }
 
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 
+  .get-started {
+    width: 100%;
+    text-align: center;
+  }
 
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .text-content {
+    padding-left: 0;
+  }
+
+  .text-content h1 {
+    font-size: 48px;
+  }
+
+  .text-content .description {
+    font-size: 20px;
+  }
+
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-image {
+    padding-right: 0;
+  }
+
+  .about-text h2 {
+    font-size: 36px;
+  }
+
+  .about-text p {
+    font-size: 20px;
+  }
+
+  .features-header {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+  .features-title {
+    font-size: 36px;
+  }
+
+  .features-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-item {
+    max-width: 100%;
+  }
+
+  .feature-bottom {
+    margin-top: 2rem;
+  }
+
+  .feedback-container h2 {
+    font-size: 24px;
+  }
+
+  .feedback-section {
+    padding: 40px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    width: 100%;
+    padding: 30px 15px;
+    border-radius: 16px;
+  }
+
+  .login-section {
+    padding: 40px 15px;
+  }
+}
