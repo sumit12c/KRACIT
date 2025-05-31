@@ -20,11 +20,14 @@
         <ul class="navigation">
           <!-- Avatar Profile Menu -->
           <li class="parent profile-menu">
-            <div class="avatar" id="profileAvatar"></div>
-            <div class="profile-dropdown" id="profileDropdown">
-              <button class="signout-btn">Sign Out</button>
-            </div>
-          </li>
+  <div class="avatar" id="profileAvatar"></div>
+  <div class="profile-dropdown" id="profileDropdown">
+    <form action="/logout" method="POST">
+      <button type="submit" class="signout-btn">Sign Out</button>
+    </form>
+  </div>
+</li>
+
         </ul>
       </nav>
 
