@@ -1,3 +1,10 @@
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -10,6 +17,35 @@ body {
   overflow-x: hidden;
 }
 
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Transition Effects */
+a, button {
+  transition: all 0.3s ease;
+}
+
+/* Hero Section */
 .hero-container {
   background: url("/images/bgimg.png") no-repeat center center/cover;
   border-radius: 0 0 30px 30px;
@@ -17,6 +53,7 @@ body {
   padding: 30px 20px;
   overflow: hidden;
   height: 100vh;
+  animation: fadeIn 1s ease-out;
 }
 
 .navbar {
@@ -24,19 +61,41 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  animation: slideUp 0.8s ease-out;
 }
 
 .logo {
   font-size: 40px;
   font-weight: bold;
   color: white;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .nav-links a {
   margin: 0 12px;
   text-decoration: none;
   color: white;
-  transition: color 0.3s ease;
+  font-size: 20px;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ff79c6;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .nav-links a:hover {
@@ -51,6 +110,12 @@ body {
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 121, 198, 0.3);
 }
 
 .hero-content {
@@ -66,6 +131,7 @@ body {
   flex: 1 1 300px;
   max-width: 500px;
   padding-left: 150px;
+  animation: slideUp 1s ease-out 0.2s backwards;
 }
 
 .text-content .tagline {
@@ -74,17 +140,28 @@ body {
   color: #ffffff;
 }
 
+/* Update these styles in your style.css file */
+
 .text-content h1 {
   font-size: 66px;
   font-weight: bold;
-  margin: 30px 0;
+  margin: 20px 0;
   color: white;
+  line-height: 1.2;
+  width: fit-content; /* This will make the text break naturally */
+  white-space: nowrap; /* Prevent automatic line breaks */
 }
 
+/* For the description text */
 .text-content .description {
   color: #ffffff;
   font-size: 26px;
   margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 0.8s forwards;
+  line-height: 1.4;
+  width: fit-content;
+  max-width: 600px; /* Adjust based on your layout */
 }
 
 .hero-buttons {
@@ -100,18 +177,26 @@ body {
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.nav-links a {
-  font-size: 20px;
+.get-started:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* About */
+/* About Section */
 .about-section {
   padding: 60px 20px;
   color: white;
   height: auto;
   padding-bottom: 60px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.about-section.in-view {
+  opacity: 1;
 }
 
 .about-content {
@@ -130,6 +215,7 @@ body {
   justify-content: center;
   padding-right: 40px;
   margin-top: 40px;
+  animation: float 4s ease-in-out infinite;
 }
 
 .about-image img {
@@ -167,7 +253,7 @@ body {
   color: #f0f0f0;
 }
 
-/* Features */
+/* Features Section */
 .features-section {
   padding: 4rem 1rem;
   color: white;
@@ -222,6 +308,14 @@ body {
 .feature-item {
   max-width: 280px;
   text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s ease;
+}
+
+.feature-item.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .feature-icon {
@@ -232,11 +326,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.feature-icon:hover {
+  transform: scale(1.1) rotate(10deg);
 }
 
 .feature-icon img {
   width: 50px;
   height: 50px;
+  transition: transform 0.3s ease;
 }
 
 /* Color ring styles */
@@ -267,9 +367,10 @@ body {
 .feature-item h3 {
   font-size: 24px;
   font-weight: 600;
+  margin-bottom: 10px;
 }
 
-/* Login */
+/* Login Section */
 .login-section {
   width: 100%;
   background: url('/images/bglog.png') no-repeat center center/cover;
@@ -292,6 +393,14 @@ body {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   color: white;
   text-align: center;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.login-container.animate {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .login-container h2 {
@@ -316,6 +425,11 @@ body {
   border-radius: 5px;
   border: none;
   outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.login-container input:focus {
+  box-shadow: 0 0 0 2px #ff79c6;
 }
 
 .forgot-password {
@@ -327,6 +441,11 @@ body {
 .forgot-password a {
   color: white;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+  color: #ff79c6;
 }
 
 .login-btn {
@@ -338,11 +457,12 @@ body {
   margin-top: 10px;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease;
 }
 
 .login-btn:hover {
   background-color: #004070;
+  transform: translateY(-2px);
 }
 
 .register-link {
@@ -354,6 +474,11 @@ body {
   color: white;
   text-decoration: none;
   font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #ff79c6;
 }
 
 .error-box {
@@ -366,9 +491,16 @@ body {
   text-align: center;
   font-weight: bold;
   font-size: 14px;
+  animation: shake 0.5s ease;
 }
 
-/* Feedback */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+/* Feedback Section */
 .feedback-section {
   background-color: #000;
   width: 100%;
@@ -391,9 +523,29 @@ body {
   font-weight: bold;
 }
 
-/* =========================
-   ✅ Responsive Enhancements
-   ========================= */
+/* Notification */
+#notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(0, 43, 92, 0.95);
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  font-size: 0.95rem;
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.4s ease;
+}
+
+#notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -448,10 +600,10 @@ body {
   }
 
   .features-header {
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
   .features-title {
     font-size: 36px;
