@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Register | CrackIT</title>
+  <title>Register | KRACIT</title>
   <style>
     * {
       margin: 0;
@@ -21,16 +21,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: url('/images/signup.png') no-repeat center center/cover;
-      z-index: -1;
+      background:url('/images/signup.png') center/cover no-repeat;
     }
 
     .form-container {
@@ -43,16 +34,12 @@
       color: white;
       text-align: center;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-
-      /* Animation setup */
       transform: scale(0);
       animation: popupAnimation 0.5s ease forwards;
     }
 
     @keyframes popupAnimation {
-      to {
-        transform: scale(1);
-      }
+      to { transform: scale(1); }
     }
 
     .logo {
@@ -79,12 +66,13 @@
       font-size: 0.9rem;
     }
 
-    form input {
+    form input, form select {
       width: 100%;
       padding: 10px;
       border: none;
       border-radius: 8px;
       margin-bottom: 15px;
+      background: rgba(255, 255, 255, 0.9);
     }
 
     form button {
@@ -102,35 +90,43 @@
     form button:hover {
       background-color: #004080;
     }
+
     #notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: rgba(0, 43, 92, 0.95);
-  color: #fff;
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  font-size: 0.95rem;
-  z-index: 999;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: all 0.4s ease;
-}
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(0, 43, 92, 0.95);
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      font-size: 0.95rem;
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.4s ease;
+    }
 
-#notification.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+    #notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.hidden {
-  display: none;
-}
+    .hidden {
+      display: none;
+    }
 
+    .error-text {
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      text-align: left;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <div class="background"></div>
   <div class="form-container">
     <div class="logo">
       <h1>KRACIT</h1>
@@ -145,61 +141,79 @@
       
       <label>Confirm Password</label>
       <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+
+      <label>Security Question</label>
+      <select id="securityQuestion" required>
+        <option value="" disabled selected>Select a security question</option>
+        <option value="What is your birth place?">What is your birth place?</option>
+        <option value="What code can you remember?">What 6 digit code can you remember?</option>
+        <option value="What is your childhood friend's name?">What is your childhood friend's name?</option>
+      </select>
+
+      <label>Security Answer</label>
+      <input type="text" id="securityAnswer" placeholder="Your answer" required />
       
       <button type="submit">Register now</button>
     </form>
   </div>
 
   <script>
-  function showNotification(message) {
-    const note = document.getElementById('notification');
-    note.textContent = message;
-    note.classList.remove('hidden');
-    note.classList.add('show');
+    function showNotification(message) {
+      const note = document.getElementById('notification');
+      note.textContent = message;
+      note.classList.remove('hidden');
+      note.classList.add('show');
 
-    setTimeout(() => {
-      note.classList.remove('show');
-      setTimeout(() => note.classList.add('hidden'), 400);
-    }, 3000); // hides after 3 seconds
-  }
-
-  document.getElementById('registerForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const confirm = document.getElementById('confirmPassword').value;
-
-    if (password !== confirm) {
-      showNotification('Passwords do not match!');
-      return;
+      setTimeout(() => {
+        note.classList.remove('show');
+        setTimeout(() => note.classList.add('hidden'), 400);
+      }, 3000);
     }
 
-    try {
-      const response = await fetch('/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
+    document.getElementById('registerForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-      const data = await response.json();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirmPassword').value;
+      const securityQuestion = document.getElementById('securityQuestion').value;
+      const securityAnswer = document.getElementById('securityAnswer').value;
 
-      if (response.ok) {
-        showNotification(data.message || 'Registration successful!');
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 2000); // delay redirect to allow message to show
-      } else {
-        showNotification(data.message || 'Registration failed.');
+      if (password !== confirm) {
+        showNotification('Passwords do not match!');
+        return;
       }
-    } catch (error) {
-      console.error('Registration error:', error);
-      showNotification('An error occurred during registration.');
-    }
-  });
-</script>
+
+      try {
+        const response = await fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ 
+            email, 
+            password,
+            securityQuestion,
+            securityAnswer
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showNotification(data.message || 'Registration successful!');
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 2000);
+        } else {
+          showNotification(data.message || 'Registration failed.');
+        }
+      } catch (error) {
+        console.error('Registration error:', error);
+        showNotification('An error occurred during registration.');
+      }
+    });
+  </script>
 
   <div id="notification" class="hidden"></div>
 </body>

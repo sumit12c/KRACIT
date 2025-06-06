@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const User = require('./models/users.js');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
@@ -52,6 +53,9 @@ app.get('/', (req, res) => {
 app.get('/signup', (req, res) => {
   res.render("sigup.ejs");
 });
+app.get('/forgot-password', (req, res) => {
+  res.render("forgot-password.ejs");
+});
 
 app.get('/dashboard', requireLogin, (req, res) => {
   res.render("dash.ejs");
@@ -62,7 +66,7 @@ app.get('/analyze-interview', requireLogin, (req, res) => {
 
 // Register route
 app.post('/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, securityQuestion, securityAnswer } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -70,7 +74,13 @@ app.post('/register', async (req, res) => {
       return res.status(409).json({ message: 'User already exists' });
     }
 
-    const newUser = new User({ email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ 
+      email, 
+      password: hashedPassword,
+      securityQuestion,
+      securityAnswer
+    });
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });
@@ -86,13 +96,17 @@ app.post('/login', async (req, res) => {
   try {
     const user = await User.findOne({ email });
 
-    if (!user || user.password !== password) {
+    if (!user) {
+      return res.status(401).render('fr01.ejs', { error: 'Invalid email or password'});
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
       return res.status(401).render('fr01.ejs', { error: 'Invalid email or password'});
     }
 
     // Set session
     req.session.userId = user._id;
-
     res.redirect("/dashboard");
   } catch (err) {
     res.status(500).send('Server error');
@@ -109,6 +123,51 @@ app.post('/logout', (req, res) => {
     res.clearCookie('connect.sid'); // Clear session cookie
     res.redirect('/'); // Redirect to homepage or login page
   });
+});
+
+
+
+
+
+
+
+
+// Verify security answer
+app.post('/verify-security-answer', async (req, res) => {
+  const { email, securityQuestion, securityAnswer } = req.body;
+
+  try {
+    const user = await User.findOne({ email, securityQuestion });
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found or security question mismatch' });
+    }
+
+    if (user.securityAnswer !== securityAnswer) {
+      return res.status(401).json({ message: 'Incorrect security answer' });
+    }
+
+    res.status(200).json({ message: 'Verification successful' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err });
+  }
+});
+
+// Reset password
+app.post('/reset-password', async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  try {
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await User.findOneAndUpdate(
+      { email },
+      { password: hashedPassword }
+    );
+
+    res.status(200).json({ message: 'Password reset successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err });
+  }
 });
 
 
