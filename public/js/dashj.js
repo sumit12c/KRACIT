@@ -3,6 +3,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const dropdown = document.getElementById("profileDropdown");
   const navbar = document.querySelector(".navigationWrapper");
 
+ 
+  function getRandomGradient() {
+      const colors = [
+          '#FF6B6B', '#6BCB77', '#4D96FF',
+          '#FFD93D', '#FF6FFB', '#845EC2',
+          '#00C9A7', '#F9F871', '#FF9671'
+      ];
+      const random1 = colors[Math.floor(Math.random() * colors.length)];
+      const random2 = colors[Math.floor(Math.random() * colors.length)];
+      return `linear-gradient(135deg, ${random1}, ${random2})`;
+  }
+
+  avatar.style.background = getRandomGradient();
+  avatar.textContent = "U";
+
+  // 👇 Rest of your existing code
   let lastScrollTop = 0;
 
   avatar.addEventListener("click", function (e) {

@@ -137,13 +137,18 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #444;
-  background-image: url(''); /* empty placeholder */
-  background-size: cover;
-  background-position: center;
   border: 2px solid white;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
+
 
 /* Dropdown box */
 .profile-menu {
@@ -165,20 +170,25 @@ body {
 
 /* Button inside dropdown */
 .signout-btn {
-  background: none;
+  background: linear-gradient(135deg, #ff6b6b, #f94d6a);
   border: none;
   color: white;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 10px 16px;
+  border-radius: 8px;
   width: 100%;
   text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .signout-btn:hover {
-  background-color: #333;
+  background: linear-gradient(135deg, #f94d6a, #ff6b6b);
+  transform: translateY(-2px);
 }
+
 
 /* First page CSS (CV Analyzer) */
 .cv-analyzer {
@@ -214,17 +224,40 @@ body {
 }
 
 .analyze-btn {
-  background-color: #ccc;
+  background: linear-gradient(135deg, #4D96FF, #6BCB77);
   border: none;
   border-radius: 25px;
   padding: 12px 24px;
   font-size: 16px;
+  font-weight: 500;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.analyze-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-25deg);
+  transition: left 0.5s ease;
+}
+
+.analyze-btn:hover::before {
+  left: 125%;
 }
 
 .analyze-btn:hover {
-  background-color: #bbb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #6BCB77, #4D96FF);
 }
 
 .cv-image {
@@ -273,23 +306,49 @@ body {
 
 .job-prep-buttons {
   display: flex;
-  gap: 85px; /* Increased horizontal space between buttons */
+  gap: 85px;
 }
 
 .prep-button {
-  background-color: #f1ecec;
-  color: rgb(0, 0, 0);
+  display: inline-block;
+  text-decoration: none; /* Removes underline */
+  background: linear-gradient(135deg,  #5bc7b8, #0795c4);
+  color: #ffffff;
   border: none;
   border-radius: 25px;
   padding: 15px 30px;
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+.prep-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-25deg);
+  transition: left 0.6s ease;
+}
+
+.prep-button:hover::before {
+  left: 125%;
 }
 
 .prep-button:hover {
-  background-color: #949191;
+  background: linear-gradient(135deg, #79ded1, #04789e);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
 }
+
 
 
 
@@ -371,23 +430,43 @@ body {
   margin-bottom: 40px;
 }
 
-.aptitude-button {
-  margin-top: 80px; /* Add space between text and button */
-}
-
 .assessment-button {
-  background-color: #ccc;
+  position: relative;
+  background: linear-gradient(135deg, #4D96FF, #6BCB77);
+  color: white;
   border: none;
   border-radius: 25px;
   padding: 15px 30px;
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
+}
+
+.assessment-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-25deg);
+  transition: left 0.5s ease;
+}
+
+.assessment-button:hover::before {
+  left: 125%;
 }
 
 .assessment-button:hover {
-  background-color: #bbb;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #6BCB77, #4D96FF);
 }
+
 
 /* Responsive adjustments if needed */
 @media (max-width: 768px) {
@@ -433,23 +512,43 @@ body {
   margin-bottom: 90px;
 }
 
-.interview-button {
-  margin-top: 20px; /* Add space between text and button */
-}
-
 .practice-button {
-  background-color: #ccc;
+  position: relative;
+  background: linear-gradient(135deg, #FF7E5F, #FEB47B);
+  color: white;
   border: none;
   border-radius: 25px;
   padding: 15px 30px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(255, 126, 95, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+
+.practice-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: skewX(-25deg);
+  transition: left 0.6s ease;
+}
+
+.practice-button:hover::before {
+  left: 125%;
 }
 
 .practice-button:hover {
-  background-color: #bbb;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(255, 126, 95, 0.9);
+  background: linear-gradient(135deg, #FEB47B, #FF7E5F);
 }
+
 
 /* Responsive adjustments if needed */
 @media (max-width: 768px) {
