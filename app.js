@@ -197,12 +197,39 @@ app.post('/analyze-interview', async (req, res) => {
     
     prompt += `Please provide comprehensive analysis in markdown format.`;
     
-    // Get the Gemini Flash model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Updated to 1.5-flash
-    
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    // Use a supported model name to avoid Bad Request errors
+   const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+
+    // Basic validation to avoid sending empty prompts which cause 400 Bad Request
+    if (!Array.isArray(questions) || !Array.isArray(answers) || questions.length === 0) {
+      return res.status(400).json({ error: 'Invalid request', message: 'Questions and answers must be non-empty arrays' });
+    }
+
+    // Attempt generateContent with a few common request shapes to handle client version differences
+    let result;
+    try {
+      result = await model.generateContent(prompt);
+    } catch (err) {
+      // If the first shape returned 400, try alternative shapes the client might expect
+      if (err && err.status === 400) {
+        try { result = await model.generateContent({ prompt }); } catch (e) {}
+        if (!result) try { result = await model.generateContent({ input: prompt }); } catch (e) {}
+        if (!result) try { result = await model.generateContent({ text: prompt }); } catch (e) {}
+      }
+      if (!result) throw err;
+    }
+
+    const response = result?.response;
+    let text;
+    if (response && typeof response.text === 'function') {
+      text = await response.text();
+    } else if (typeof result?.text === 'function') {
+      text = await result.text();
+    } else if (typeof result?.text === 'string') {
+      text = result.text;
+    } else if (typeof result === 'string') {
+      text = result;
+    }
     
     res.json({ analysis: text });
   } catch (error) {
