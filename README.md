@@ -1,6 +1,8 @@
-# KRACIT
-[![Live Site](https://img.shields.io/badge/Live_Demo-2EA043?style=for-the-badge&logo=google-chrome&logoColor=white)](https://kracit.onrender.com)
-A comprehensive web application designed to provide users with an interactive platform for learning and engagement.
+# KRACIT 🚀
+
+[![View Site](https://img.shields.io/badge/View_Site-%232EA043.svg?logo=google-chrome&logoColor=white)](https://kracit.onrender.com)
+
+A high-performance web platform engineered for immersive learning and seamless user engagement. KRACIT bridges the gap between complex information and interactive education through a streamlined, user-centric interface.
 
 ## Developed By
 
