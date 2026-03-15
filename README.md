@@ -1,5 +1,5 @@
 # KRACIT
-
+[![Live Site](https://img.shields.io/badge/Live_Demo-2EA043?style=for-the-badge&logo=google-chrome&logoColor=white)](https://kracit.onrender.com)
 A comprehensive web application designed to provide users with an interactive platform for learning and engagement.
 
 ## Developed By
