@@ -2,6 +2,9 @@
 
 [![View Site](https://img.shields.io/badge/View_Site-%232EA043.svg?logo=google-chrome&logoColor=white)](https://kracit.onrender.com)
 
+> [!IMPORTANT]
+> **Note on Deployment:** This project is hosted on Render's free tier. If the site has been inactive, it may take **30-60 seconds** to spin up. Please do not close the tab; it will load shortly!
+
 A high-performance web platform engineered for immersive learning and seamless user engagement. KRACIT bridges the gap between complex information and interactive education through a streamlined, user-centric interface.
 
 ## Developed By
